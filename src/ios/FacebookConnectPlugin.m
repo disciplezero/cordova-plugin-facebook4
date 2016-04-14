@@ -47,6 +47,16 @@
     }
     
     [[FBSDKApplicationDelegate sharedInstance] application:[UIApplication sharedApplication] didFinishLaunchingWithOptions:launchOptions];
+    if(launchOptions[UIApplicationLaunchOptionsURLKey] == nil) {
+      [FBSDKAppLinkUtility fetchDeferredAppLink:^(NSURL *url, NSError *error) {
+        if(error) {
+          NSLog(@"Received error while fetching deferred app link %@", error);
+        }
+        if(url) {
+          [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification object:url]];
+        }
+      }];
+    }
 }
 
 - (void) applicationDidBecomeActive:(NSNotification *) notification {
