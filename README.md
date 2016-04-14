@@ -1,4 +1,4 @@
-# cordova-plugin-facebook4
+# cordova-plugin-facebook4-dz
 
 > Use Facebook SDK version 4 in Cordova projects
 
